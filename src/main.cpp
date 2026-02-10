@@ -5,7 +5,7 @@
 ** main
 */
 
-#include "NanoTekSpice.h"
+#include "NanoTekSpice.hpp"
 
 int main(void)
 {

@@ -5,7 +5,7 @@
 ** NanoTekSpice
 */
 
-#include "NanoTekSpice.h"
+#include "NanoTekSpice.hpp"
 
 NanoTekSpice::NanoTekSpice()
 {
