@@ -5,19 +5,33 @@
 ## project
 ##
 
-SRC	=	src/main.c	\
-		src/NanoTekspice.cpp	\
+SRC     =   src/main.cpp \
+			src/NanoTekSpice.cpp \
+			src/components/AComponent.cpp \
+			src/components/Link.cpp \
+			src/components/AndComponent.cpp \
+			src/components/OrComponent.cpp \
+			src/components/XorComponent.cpp \
+			src/components/FalseComponent.cpp \
+			src/components/TrueComponent.cpp \
+			src/components/NotComponent.cpp \
+			src/components/InputComponent.cpp \
+			src/components/OutputComponent.cpp \
 
-OBJ	=	$(SRC:.c=.o)
+CXX     =   clang++
 
-NAME	=	nanotekspice
+OBJ     =   $(SRC:.cpp=.o)
 
-CFLAGS = -Wextra -Wall -I ./include/ -lm -std=gnu17
+NAME    =   nanotekspice
 
-all:	$(NAME)
+CXXFLAGS = -Wextra -Wall -I ./include/ -std=c++20
 
-$(NAME):	$(OBJ)
-	epiclang -o $(NAME) $(OBJ) $(CFLAGS) 
+LDLIBS   = -lm
+
+all:    $(NAME)
+
+$(NAME):    $(OBJ)
+	$(CXX) -o $(NAME) $(OBJ) $(CXXFLAGS) $(LDLIBS)
 
 clean:
 	rm -f $(OBJ)

@@ -8,7 +8,7 @@
 #ifndef NANOTEKSPICE_H
 #define NANOTEKSPICE_H
 
-#include "IComponents.hpp"
+#include "IComponent.hpp"
 
 class NanoTekSpice {
     public:

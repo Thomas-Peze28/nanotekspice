@@ -8,17 +8,27 @@
 #ifndef ACOMPONENTS_H
 #define ACOMPONENTS_H
 
-#include "IComponents.hpp"
+#include "IComponent.hpp"
+#include "Link.hpp"
+#include <map>
+#include <vector>
 
 namespace nts {
 
     class AComponent : public IComponent {
         public:
-            virtual ~AComponent() = default;
+            AComponent() = default;
+            ~AComponent() = default;
 
             void simulate(std::size_t tick) override;
-            nts::Tristate compute(std::size_t pin) override;
+
             void setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin) override;
+            nts::Tristate getLink(std::size_t pin);
+
+        protected:
+        private:
+            std::vector<size_t> _pins;
+            std::map<size_t , nts::Link> _links;
     };
 }
 

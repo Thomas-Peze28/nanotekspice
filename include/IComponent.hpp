@@ -11,6 +11,7 @@
 #include <cstddef>
 
 namespace nts {
+
     enum Tristate {
         Undefined = (-true),
         True = true,

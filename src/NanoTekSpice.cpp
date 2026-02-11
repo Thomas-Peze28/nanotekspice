@@ -6,11 +6,3 @@
 */
 
 #include "NanoTekSpice.hpp"
-
-NanoTekSpice::NanoTekSpice()
-{
-}
-
-NanoTekSpice::~NanoTekSpice()
-{
-}
