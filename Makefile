@@ -7,6 +7,7 @@
 
 SRC     =   src/main.cpp \
 			src/NanoTekSpice.cpp \
+			src/ComponentFactory.cpp \
 			src/components/AComponent.cpp \
 			src/components/Link.cpp \
 			src/components/AndComponent.cpp \

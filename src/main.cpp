@@ -6,15 +6,9 @@
 */
 
 #include "NanoTekSpice.hpp"
-#include "AComponent.hpp"
-#include "Circuit.hpp"
 #include <iostream>
 #include <memory>
 
-#include "AndComponent.hpp"
-#include "TrueComponent.hpp"
-#include "FalseComponent.hpp"
-#include "NotComponent.hpp"
 
 std::ostream &operator<<(std::ostream &s, nts::Tristate v)
 {
