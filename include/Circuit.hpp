@@ -9,7 +9,7 @@
 #define CIRCUIT_H
 
 #include "IComponent.hpp"
-#include <list>
+#include <vector>
 #include <memory>
 
 namespace nts {
