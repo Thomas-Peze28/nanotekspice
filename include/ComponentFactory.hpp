@@ -14,15 +14,18 @@
 #include <map>
 #include <functional>
 
+namespace nts
+{
+    class ComponentFactory
+    {
+    public:
+        ComponentFactory();
+        ~ComponentFactory() = default;
 
-namespace nts {
+        std::unique_ptr<nts::IComponent> createComponent(const std::string &type);
 
-    class ComponentFactory {
-        public:
-            ComponentFactory();
-            ~ComponentFactory() = default;
-
-        private:
+    private:
+        std::map<std::string, std::function<std::unique_ptr<nts::IComponent>()>> _creators;
     };
 }
 

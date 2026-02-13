@@ -6,3 +6,50 @@
 */
 
 #include "ComponentFactory.hpp"
+
+nts::ComponentFactory::ComponentFactory()
+{
+    _creators["input"] = []()
+    {
+        return std::make_unique<InputComponent>();
+    };
+    _creators["output"] = []()
+    {
+        return std::make_unique<OutputComponent>();
+    };
+    _creators["true"] = []()
+    {
+        return std::make_unique<TrueComponent>();
+    };
+    _creators["false"] = []()
+    {
+        return std::make_unique<FalseComponent>();
+    };
+    _creators["and"] = []()
+    {
+        return std::make_unique<AndComponent>();
+    };
+    _creators["or"] = []()
+    {
+        return std::make_unique<OrComponent>();
+    };
+    _creators["xor"] = []()
+    {
+        return std::make_unique<XorComponent>();
+    };
+    _creators["not"] = []()
+    {
+        return std::make_unique<NotComponent>();
+    };
+}
+
+std::unique_ptr<nts::IComponent> nts::ComponentFactory::createComponent(const std::string &type)
+{
+    auto it = _creators.find(type);
+
+    if (it != _creators.end())
+    {
+        return it->second();
+    }
+    return nullptr;
+}
