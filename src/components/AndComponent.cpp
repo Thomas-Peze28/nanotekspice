@@ -7,6 +7,11 @@
 
 #include "AndComponent.hpp"
 
+/*
+** @brief Compute the output of the AndComponent based on its input pins.
+** @param pin The pin number to compute (should be 3 for the output).
+** @return The computed state of the output pin, or Undefined if the pin number is invalid
+*/
 nts::Tristate nts::AndComponent::compute(std::size_t pin)
 {
 

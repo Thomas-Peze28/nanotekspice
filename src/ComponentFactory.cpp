@@ -7,6 +7,9 @@
 
 #include "ComponentFactory.hpp"
 
+/*
+** @brief Construct a ComponentFactory and register component creators for each supported type.
+*/
 nts::ComponentFactory::ComponentFactory()
 {
     _creators["input"] = []()
@@ -43,6 +46,11 @@ nts::ComponentFactory::ComponentFactory()
     };
 }
 
+/*
+** @brief Create a component of the specified type.
+** @param type The type of component to create (e.g., "and", "or", "not", "input", "output", "true", "false").
+** @return A unique pointer to the created component, or nullptr if the type is not recognized.
+*/
 std::unique_ptr<nts::IComponent> nts::ComponentFactory::createComponent(const std::string &type)
 {
     auto it = _creators.find(type);
