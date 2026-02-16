@@ -25,6 +25,7 @@
 #include "NotComponent.hpp"
 #include "4001Component.hpp"
 #include "4011Component.hpp"
+#include "4030Component.hpp"
 #include "NandComponent.hpp"
 #include "NorComponent.hpp"
 
