@@ -56,7 +56,6 @@ nts::ComponentFactory::ComponentFactory()
     {
         return std::make_unique<NorComponent>();
     };
-
     _creators["4001"] = []()
     {
         return std::make_unique<Component4001>();
