@@ -20,8 +20,9 @@ SRC     =   src/main.cpp \
 			src/components/special_components/OutputComponent.cpp \
 			src/components/special_components/ClockComponent.cpp \
 			src/components/gate_components/4001Component.cpp \
+			src/components/gate_components/4011Component.cpp \
 			src/components/bonus_components/NorComponent.cpp \
-			src/components/bonus_components/NandComponent.cpp
+			src/components/bonus_components/NandComponent.cpp \
 
 CXX     =   clang++
 
