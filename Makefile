@@ -18,6 +18,7 @@ SRC     =   src/main.cpp \
 			src/components/NotComponent.cpp \
 			src/components/InputComponent.cpp \
 			src/components/OutputComponent.cpp \
+			src/components/ClockComponent.cpp \
 
 CXX     =   clang++
 
@@ -25,7 +26,7 @@ OBJ     =   $(SRC:.cpp=.o)
 
 NAME    =   nanotekspice
 
-CXXFLAGS = -Wextra -Wall -I ./include/ -I ./include/components -std=c++20
+CXXFLAGS = -Wextra -Wall -I ./include/ -I ./include/components -I ./include/components/special_components -I ./include/components/elementary_components  -std=c++20
 
 LDLIBS   = -lm
 
