@@ -19,6 +19,7 @@ SPECIAL_COMPONENTS = src/components/special_components/FalseComponent.cpp \
 GATE_COMPONENTS = src/components/gate_components/4001Component.cpp \
 				  src/components/gate_components/4011Component.cpp \
 				  src/components/gate_components/4030Component.cpp \
+				  src/components/gate_components/4069Component.cpp \
 				  src/components/gate_components/4071Component.cpp \
 				  src/components/gate_components/4081Component.cpp \
 
