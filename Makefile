@@ -26,7 +26,7 @@ OBJ     =   $(SRC:.cpp=.o)
 
 NAME    =   nanotekspice
 
-CXXFLAGS = -Wextra -Wall -I ./include/ -I ./include/components -I ./include/components/special_components -I ./include/components/elementary_components  -std=c++20
+CXXFLAGS = -Wextra -Wall -I ./include/ -I ./include/components -I ./include/components/special_components -I ./include/components/elementary_components -I ./include/components/gate_components  -std=c++20
 
 LDLIBS   = -lm
 
