@@ -10,15 +10,17 @@ SRC     =   src/main.cpp \
 			src/ComponentFactory.cpp \
 			src/components/AComponent.cpp \
 			src/components/Link.cpp \
-			src/components/AndComponent.cpp \
-			src/components/OrComponent.cpp \
-			src/components/XorComponent.cpp \
-			src/components/FalseComponent.cpp \
-			src/components/TrueComponent.cpp \
-			src/components/NotComponent.cpp \
-			src/components/InputComponent.cpp \
-			src/components/OutputComponent.cpp \
-			src/components/ClockComponent.cpp \
+			src/components/elementary_components/AndComponent.cpp \
+			src/components/elementary_components/OrComponent.cpp \
+			src/components/elementary_components/XorComponent.cpp \
+			src/components/elementary_components/NotComponent.cpp \
+			src/components/special_components/FalseComponent.cpp \
+			src/components/special_components/TrueComponent.cpp \
+			src/components/special_components/InputComponent.cpp \
+			src/components/special_components/OutputComponent.cpp \
+			src/components/special_components/ClockComponent.cpp \
+			src/components/gate_components/4001Component.cpp \
+			src/components/bonus_components/NorComponent.cpp \
 
 CXX     =   clang++
 
