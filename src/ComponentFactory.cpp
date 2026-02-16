@@ -72,6 +72,10 @@ nts::ComponentFactory::ComponentFactory()
     {
         return std::make_unique<Component4071>();
     };
+    _creators["4081"] = []()
+    {
+        return std::make_unique<Component4081>();
+    };
 }
 
 /*

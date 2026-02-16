@@ -15,25 +15,25 @@
 nts::Tristate nts::Component4071::compute(std::size_t pin)
 {
     if (pin == 3)
-        return computeAnd(getLink(1), getLink(2));
+        return computeOr(getLink(1), getLink(2));
     if (pin == 4)
-        return computeAnd(getLink(5), getLink(6));
+        return computeOr(getLink(5), getLink(6));
     if (pin == 10)
-        return computeAnd(getLink(8), getLink(9));
+        return computeOr(getLink(8), getLink(9));
     if (pin == 11)
-        return computeAnd(getLink(12), getLink(13));
+        return computeOr(getLink(12), getLink(13));
     return nts::Undefined;
 }
 
 /*
-** @brief Compute the AND operation for two input signals.
+** @brief Compute the OR operation for two input signals.
 ** @param input1 The first input signal.
 ** @param input2 The second input signal.
-** @return The result of the AND operation.
+** @return The result of the OR operation.
 */
-nts::Tristate nts::Component4071::computeAnd(nts::Tristate input1, nts::Tristate input2)
+nts::Tristate nts::Component4071::computeOr(nts::Tristate input1, nts::Tristate input2)
 {
-    if (input1 == nts::True && input2 == nts::True)
+    if (input1 == nts::True || input2 == nts::True)
         return nts::True;
     else if (input1 == nts::Undefined || input2 == nts::Undefined)
         return nts::Undefined;
