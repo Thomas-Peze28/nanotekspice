@@ -20,6 +20,10 @@ nts::ComponentFactory::ComponentFactory()
     {
         return std::make_unique<OutputComponent>();
     };
+    _creators["clock"] = []()
+    {
+        return std::make_unique<ClockComponent>();
+    };
     _creators["true"] = []()
     {
         return std::make_unique<TrueComponent>();
@@ -43,6 +47,10 @@ nts::ComponentFactory::ComponentFactory()
     _creators["not"] = []()
     {
         return std::make_unique<NotComponent>();
+    };
+    _creators["4001"] = []()
+    {
+        return std::make_unique<Component4001>();
     };
 }
 

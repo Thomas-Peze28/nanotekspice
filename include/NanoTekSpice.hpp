@@ -16,12 +16,14 @@
 
 #include "InputComponent.hpp"
 #include "OutputComponent.hpp"
+#include "ClockComponent.hpp"
 #include "TrueComponent.hpp"
 #include "FalseComponent.hpp"
 #include "AndComponent.hpp"
 #include "OrComponent.hpp"
 #include "XorComponent.hpp"
 #include "NotComponent.hpp"
+#include "4001Component.hpp"
 
 class NanoTekSpice {
     public:
