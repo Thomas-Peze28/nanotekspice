@@ -21,7 +21,7 @@ std::vector<std::string> Parsing::clean_string(const std::string& str)
     std::string current_word;
 
     for (char c : str) {
-        if (c == ' ' || c == '\t') {
+        if (c == ' ' || c == '\t' || c == ':') {
             if (!current_word.empty()) {
                 words.push_back(current_word);
                 current_word.clear();

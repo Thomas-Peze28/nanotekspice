@@ -10,7 +10,7 @@ std::vector<std::string> clean_string(const std::string& str)
     std::string current_word;
 
     for (char c : str) {
-        if (c == ' ' || c == '\t') {
+        if (c == ' ' || c == '\t' || c == ':') {
             if (!current_word.empty()) {
                 words.push_back(current_word);
                 current_word.clear();
@@ -46,7 +46,7 @@ std::vector<std::vector<std::string>> parse_file(std::string file_name)
 
 int main()
 {
-    std::vector<std::vector<std::string>> lines = parse_file("test.txt");
+    std::vector<std::vector<std::string>> lines = parse_file("G-OOP-400_nanotekspice/nts_single/and.nts");
     for (std::vector<std::string> line : lines) {
         for (std::string word : line)
             std::cout << word << "|";
