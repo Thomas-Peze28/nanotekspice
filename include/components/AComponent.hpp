@@ -32,4 +32,9 @@ namespace nts {
     };
 }
 
+nts::Tristate operator!(nts::Tristate value);
+nts::Tristate operator&&(nts::Tristate val1, nts::Tristate val2);
+nts::Tristate operator||(nts::Tristate val1, nts::Tristate val2);
+nts::Tristate operator^(nts::Tristate val1, nts::Tristate val2);
+
 #endif /* ACOMPONENTS_H */

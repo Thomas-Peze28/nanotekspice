@@ -15,31 +15,16 @@
 nts::Tristate nts::Component4069::compute(std::size_t pin)
 {
     if (pin == 2)
-        return computeNot(getLink(1));
+        return !getLink(1);
     if (pin == 4)
-        return computeNot(getLink(3));
+        return !getLink(3);
     if (pin == 6)
-        return computeNot(getLink(5));
+        return !getLink(5);
     if (pin == 8)
-        return computeNot(getLink(9));
+        return !getLink(9);
     if (pin == 10)
-        return computeNot(getLink(11));
+        return !getLink(11);
     if (pin == 12)
-        return computeNot(getLink(13));
+        return !getLink(13);
     return nts::Undefined;
-}
-
-/*
-** @brief Compute the NOT operation for an input signal.
-** @param input The input signal.
-** @return The result of the NOT operation.
-*/
-nts::Tristate nts::Component4069::computeNot(nts::Tristate input)
-{
-    if (input == nts::True)
-        return nts::False;
-    else if (input == nts::False)
-        return nts::True;
-    else
-        return nts::Undefined;
 }
