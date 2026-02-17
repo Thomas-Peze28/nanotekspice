@@ -15,6 +15,16 @@ Parsing::~Parsing()
 {
 }
 
+std::vector<std::vector<std::string>> Parsing::get_chipsets()
+{
+    return _chipsets;
+}
+
+std::vector<std::vector<std::string>> Parsing::get_links()
+{
+    return _links;
+}
+
 std::vector<std::string> Parsing::clean_string(const std::string& str)
 {
     std::vector<std::string> words;

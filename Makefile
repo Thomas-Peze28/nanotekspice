@@ -31,6 +31,7 @@ SRC     =   src/main.cpp \
 			src/ComponentFactory.cpp \
 			src/components/AComponent.cpp \
 			src/components/Link.cpp \
+			src/parsing/Parsing.cpp	\
 			$(ELEMENTARY_COMPONENTS) \
 			$(SPECIAL_COMPONENTS) \
 			$(GATE_COMPONENTS) \
@@ -42,7 +43,7 @@ OBJ     =   $(SRC:.cpp=.o)
 
 NAME    =   nanotekspice
 
-CXXFLAGS = -Wextra -Wall -I ./include/ -I ./include/components -I ./include/components/special_components -I ./include/components/elementary_components -I ./include/components/gate_components -I ./include/components/bonus_components  -std=c++20
+CXXFLAGS = -Wextra -Wall -I ./include/ -I ./include/components -I ./include/components/special_components -I ./include/components/elementary_components -I ./include/components/gate_components -I ./include/components/bonus_components -I ./include/parsing -std=c++20
 
 LDLIBS   = -lm
 

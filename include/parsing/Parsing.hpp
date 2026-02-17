@@ -15,7 +15,9 @@ class Parsing {
     public:
         Parsing();
         ~Parsing();
-        void parse_file(std::string file_name);
+        std::vector<std::vector<std::string>> get_chipsets();
+        std::vector<std::vector<std::string>> get_links();
+        // void parse_file(std::string file_name);
         std::vector<std::string> clean_string(const std::string& str);
         std::vector<std::vector<std::string>> parse_file_name(std::string file_name);
 
