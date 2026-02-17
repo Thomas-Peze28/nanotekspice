@@ -196,7 +196,7 @@ int main(void)
         {nts::Tristate::True, nts::Tristate::False, nts::Tristate::True, "T/F"},
         {nts::Tristate::False, nts::Tristate::True, nts::Tristate::True, "F/T"},
         {nts::Tristate::False, nts::Tristate::False, nts::Tristate::True, "F/F"},
-        {nts::Tristate::Undefined, nts::Tristate::True, nts::Tristate::True, "U/T"},
+        {nts::Tristate::Undefined, nts::Tristate::True, nts::Tristate::Undefined, "U/T"},
         {nts::Tristate::Undefined, nts::Tristate::False, nts::Tristate::True, "U/F"},
         {nts::Tristate::True, nts::Tristate::Undefined, nts::Tristate::Undefined, "T/U"},
         {nts::Tristate::False, nts::Tristate::Undefined, nts::Tristate::True, "F/U"}
