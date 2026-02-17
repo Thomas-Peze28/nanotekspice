@@ -7,6 +7,69 @@
 
 #include "AComponent.hpp"
 
+/*
+** @brief NOT operation for input value.
+** @param value The input value to negate.
+** @return The negated value of the input.
+*/
+nts::Tristate operator!(nts::Tristate value)
+{
+    if (value == nts::Tristate::True)
+        return nts::Tristate::False;
+    else if (value == nts::Tristate::False)
+        return nts::Tristate::True;
+    else
+        return nts::Tristate::Undefined;
+}
+
+/*
+** @brief AND operation for two input values.
+** @param val1 The first input value.
+** @param val2 The second input value.
+** @return The result of the AND operation on the two input values.
+*/
+nts::Tristate operator&&(nts::Tristate val1, nts::Tristate val2)
+{
+    if ((val1 == nts::Tristate::False) || (val2 == nts::Tristate::False))
+        return nts::Tristate::False;
+    else if ((val1 == nts::Tristate::True) && (val2 == nts::Tristate::True))
+        return nts::Tristate::True;
+    else
+        return nts::Tristate::Undefined;
+}
+
+/*
+** @brief OR operation for two input values.
+** @param val1 The first input value.
+** @param val2 The second input value.
+** @return The result of the OR operation on the two input values.
+*/
+nts::Tristate operator||(nts::Tristate val1, nts::Tristate val2)
+{
+    if ((val1 == nts::Tristate::True) || (val2 == nts::Tristate::True))
+        return nts::Tristate::True;
+    else if ((val1 == nts::Tristate::False) && (val2 == nts::Tristate::False))
+        return nts::Tristate::False;
+    else
+        return nts::Tristate::Undefined;
+}
+
+/*
+** @brief XOR operation for two input values.
+** @param val1 The first input value.
+** @param val2 The second input value.
+** @return The result of the XOR operation on the two input values.
+*/
+nts::Tristate operator^(nts::Tristate val1, nts::Tristate val2)
+{
+     if ((val1 == nts::Tristate::True && val2 == nts::Tristate::False) || (val1 == nts::Tristate::False && val2 == nts::Tristate::True))
+        return nts::Tristate::True;
+    else if ((val1 == nts::Tristate::True && val2 == nts::Tristate::True) || (val1 == nts::Tristate::False && val2 == nts::Tristate::False))
+        return nts::Tristate::False;
+    else
+        return nts::Tristate::Undefined;
+}
+
 void nts::AComponent::simulate(std::size_t tick)
 {
     (void)tick;
