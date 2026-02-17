@@ -20,11 +20,6 @@ nts::Tristate nts::NandComponent::compute(std::size_t pin)
 
     nts::Tristate input1 = getLink(1);
     nts::Tristate input2 = getLink(2);
-    
-    if (input1 == nts::Tristate::True && input2 == nts::Tristate::True)
-        return nts::Tristate::False;
-    else if (input1 == nts::Tristate::False || input2 == nts::Tristate::False)
-        return nts::Tristate::True;
-    else
-        return nts::Tristate::Undefined;
+
+    return !(input1 && input2);
 }

@@ -18,7 +18,6 @@ namespace nts {
             ~Component4011() = default;
 
             nts::Tristate compute(std::size_t pin) override;
-            nts::Tristate computeNand(nts::Tristate input1, nts::Tristate input2);
     };
 }
 
