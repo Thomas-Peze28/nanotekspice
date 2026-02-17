@@ -35,8 +35,8 @@ nts::Tristate nts::Component4071::computeOr(nts::Tristate input1, nts::Tristate 
 {
     if (input1 == nts::True || input2 == nts::True)
         return nts::True;
-    else if (input1 == nts::Undefined || input2 == nts::Undefined)
-        return nts::Undefined;
-    else
+    else if (input1 == nts::False && input2 == nts::False)
         return nts::False;
+    else
+        return nts::Undefined;
 }

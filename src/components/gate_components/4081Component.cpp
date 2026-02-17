@@ -33,10 +33,10 @@ nts::Tristate nts::Component4081::compute(std::size_t pin)
 */
 nts::Tristate nts::Component4081::computeAnd(nts::Tristate input1, nts::Tristate input2)
 {
-    if (input1 == nts::True && input2 == nts::True)
-        return nts::True;
-    else if (input1 == nts::Undefined || input2 == nts::Undefined)
-        return nts::Undefined;
-    else
+    if (input1 == nts::False || input2 == nts::False)
         return nts::False;
+    else if (input1 == nts::True && input2 == nts::True)
+        return nts::True;
+    else
+        return nts::Undefined;
 }
