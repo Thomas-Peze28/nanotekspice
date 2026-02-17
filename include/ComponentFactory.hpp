@@ -23,6 +23,8 @@ namespace nts
         ~ComponentFactory() = default;
 
         std::unique_ptr<nts::IComponent> createComponent(const std::string &type);
+        std::map<std::string, std::function<std::unique_ptr<nts::IComponent>()>> get_creators() const;
+        bool find_creator(const std::string &type);
 
     private:
         std::map<std::string, std::function<std::unique_ptr<nts::IComponent>()>> _creators;

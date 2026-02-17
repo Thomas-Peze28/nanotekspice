@@ -97,3 +97,13 @@ std::unique_ptr<nts::IComponent> nts::ComponentFactory::createComponent(const st
     }
     return nullptr;
 }
+
+std::map<std::string, std::function<std::unique_ptr<nts::IComponent>()>> nts::ComponentFactory::get_creators() const
+{
+    return _creators;
+}
+
+bool nts::ComponentFactory::find_creator(const std::string &type)
+{
+    return _creators.find(type) != _creators.end();
+}
