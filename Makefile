@@ -5,22 +5,36 @@
 ## project
 ##
 
+ELEMENTARY_COMPONENTS = src/components/elementary_components/AndComponent.cpp \
+						src/components/elementary_components/OrComponent.cpp \
+						src/components/elementary_components/XorComponent.cpp \
+						src/components/elementary_components/NotComponent.cpp \
+
+SPECIAL_COMPONENTS = src/components/special_components/FalseComponent.cpp \
+					 src/components/special_components/TrueComponent.cpp \
+					 src/components/special_components/InputComponent.cpp \
+					 src/components/special_components/OutputComponent.cpp \
+					 src/components/special_components/ClockComponent.cpp \
+
+GATE_COMPONENTS = src/components/gate_components/4001Component.cpp \
+				  src/components/gate_components/4011Component.cpp \
+				  src/components/gate_components/4030Component.cpp \
+				  src/components/gate_components/4069Component.cpp \
+				  src/components/gate_components/4071Component.cpp \
+				  src/components/gate_components/4081Component.cpp \
+
+BONUS_COMPONENTS = src/components/bonus_components/NorComponent.cpp \
+				   src/components/bonus_components/NandComponent.cpp \
+
 SRC     =   src/main.cpp \
 			src/NanoTekSpice.cpp \
 			src/ComponentFactory.cpp \
 			src/components/AComponent.cpp \
 			src/components/Link.cpp \
-			src/components/elementary_components/AndComponent.cpp \
-			src/components/elementary_components/OrComponent.cpp \
-			src/components/elementary_components/XorComponent.cpp \
-			src/components/elementary_components/NotComponent.cpp \
-			src/components/special_components/FalseComponent.cpp \
-			src/components/special_components/TrueComponent.cpp \
-			src/components/special_components/InputComponent.cpp \
-			src/components/special_components/OutputComponent.cpp \
-			src/components/special_components/ClockComponent.cpp \
-			src/components/gate_components/4001Component.cpp \
-			src/components/bonus_components/NorComponent.cpp \
+			$(ELEMENTARY_COMPONENTS) \
+			$(SPECIAL_COMPONENTS) \
+			$(GATE_COMPONENTS) \
+			$(BONUS_COMPONENTS) \
 
 CXX     =   clang++
 
