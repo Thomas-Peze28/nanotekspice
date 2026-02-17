@@ -190,6 +190,122 @@ int main(void)
         }
     }
 
+    std::cout << "\n== NAND (bonus) ==" << std::endl;
+    testBinaryGate(factory, "nand", {
+        {nts::Tristate::True, nts::Tristate::True, nts::Tristate::False, "T/T"},
+        {nts::Tristate::True, nts::Tristate::False, nts::Tristate::True, "T/F"},
+        {nts::Tristate::False, nts::Tristate::True, nts::Tristate::True, "F/T"},
+        {nts::Tristate::False, nts::Tristate::False, nts::Tristate::True, "F/F"},
+        {nts::Tristate::Undefined, nts::Tristate::True, nts::Tristate::True, "U/T"},
+        {nts::Tristate::Undefined, nts::Tristate::False, nts::Tristate::True, "U/F"},
+        {nts::Tristate::True, nts::Tristate::Undefined, nts::Tristate::Undefined, "T/U"},
+        {nts::Tristate::False, nts::Tristate::Undefined, nts::Tristate::True, "F/U"}
+    });
+
+    std::cout << "\n== NOR (bonus) ==" << std::endl;
+    testBinaryGate(factory, "nor", {
+        {nts::Tristate::True, nts::Tristate::True, nts::Tristate::False, "T/T"},
+        {nts::Tristate::True, nts::Tristate::False, nts::Tristate::False, "T/F"},
+        {nts::Tristate::False, nts::Tristate::True, nts::Tristate::False, "F/T"},
+        {nts::Tristate::False, nts::Tristate::False, nts::Tristate::True, "F/F"},
+        {nts::Tristate::Undefined, nts::Tristate::True, nts::Tristate::False, "U/T"},
+        {nts::Tristate::Undefined, nts::Tristate::False, nts::Tristate::Undefined, "U/F"},
+        {nts::Tristate::True, nts::Tristate::Undefined, nts::Tristate::False, "T/U"},
+        {nts::Tristate::False, nts::Tristate::Undefined, nts::Tristate::Undefined, "F/U"}
+    });
+
+    std::cout << "\n== 4001 (NOR gate) - All pins ==" << std::endl;
+    testBinaryGate(factory, "4001", {
+        {nts::Tristate::True, nts::Tristate::True, nts::Tristate::False, "T/T"},
+        {nts::Tristate::True, nts::Tristate::False, nts::Tristate::False, "T/F"},
+        {nts::Tristate::False, nts::Tristate::True, nts::Tristate::False, "F/T"},
+        {nts::Tristate::False, nts::Tristate::False, nts::Tristate::True, "F/F"},
+        {nts::Tristate::Undefined, nts::Tristate::False, nts::Tristate::Undefined, "U/F"},
+        {nts::Tristate::True, nts::Tristate::Undefined, nts::Tristate::False, "T/U"}
+    });
+
+    std::cout << "\n== 4011 (NAND gate) - All pins ==" << std::endl;
+    testBinaryGate(factory, "4011", {
+        {nts::Tristate::True, nts::Tristate::True, nts::Tristate::False, "T/T"},
+        {nts::Tristate::True, nts::Tristate::False, nts::Tristate::True, "T/F"},
+        {nts::Tristate::False, nts::Tristate::True, nts::Tristate::True, "F/T"},
+        {nts::Tristate::False, nts::Tristate::False, nts::Tristate::True, "F/F"},
+        {nts::Tristate::Undefined, nts::Tristate::False, nts::Tristate::True, "U/F"},
+        {nts::Tristate::Undefined, nts::Tristate::True, nts::Tristate::Undefined, "U/T"}
+    });
+
+    std::cout << "\n== 4030 (XOR gate) - All pins ==" << std::endl;
+    testBinaryGate(factory, "4030", {
+        {nts::Tristate::True, nts::Tristate::True, nts::Tristate::False, "T/T"},
+        {nts::Tristate::True, nts::Tristate::False, nts::Tristate::True, "T/F"},
+        {nts::Tristate::False, nts::Tristate::True, nts::Tristate::True, "F/T"},
+        {nts::Tristate::False, nts::Tristate::False, nts::Tristate::False, "F/F"},
+        {nts::Tristate::Undefined, nts::Tristate::True, nts::Tristate::Undefined, "U/T"},
+        {nts::Tristate::Undefined, nts::Tristate::False, nts::Tristate::Undefined, "U/F"}
+    });
+
+    std::cout << "\n== 4069 (NOT gate) - All pins ==" << std::endl;
+    testUnaryGate(factory, "4069", {
+        {nts::Tristate::True, nts::Tristate::False, "T"},
+        {nts::Tristate::False, nts::Tristate::True, "F"},
+        {nts::Tristate::Undefined, nts::Tristate::Undefined, "U"}
+    });
+
+    std::cout << "\n== 4071 (OR gate) - All pins ==" << std::endl;
+    testBinaryGate(factory, "4071", {
+        {nts::Tristate::True, nts::Tristate::True, nts::Tristate::True, "T/T"},
+        {nts::Tristate::True, nts::Tristate::False, nts::Tristate::True, "T/F"},
+        {nts::Tristate::False, nts::Tristate::True, nts::Tristate::True, "F/T"},
+        {nts::Tristate::False, nts::Tristate::False, nts::Tristate::False, "F/F"},
+        {nts::Tristate::Undefined, nts::Tristate::True, nts::Tristate::True, "U/T"},
+        {nts::Tristate::Undefined, nts::Tristate::False, nts::Tristate::Undefined, "U/F"}
+    });
+
+    std::cout << "\n== 4081 (AND gate) - All pins ==" << std::endl;
+    testBinaryGate(factory, "4081", {
+        {nts::Tristate::True, nts::Tristate::True, nts::Tristate::True, "T/T"},
+        {nts::Tristate::True, nts::Tristate::False, nts::Tristate::False, "T/F"},
+        {nts::Tristate::False, nts::Tristate::True, nts::Tristate::False, "F/T"},
+        {nts::Tristate::False, nts::Tristate::False, nts::Tristate::False, "F/F"},
+        {nts::Tristate::Undefined, nts::Tristate::False, nts::Tristate::False, "U/F"},
+        {nts::Tristate::Undefined, nts::Tristate::True, nts::Tristate::Undefined, "U/T"}
+    });
+
+    std::cout << "\n== Complex Gate Combinations ==" << std::endl;
+    {
+        // AND(OR(T, F), NAND(T, F))
+        auto input1 = factory.createComponent("input");
+        auto input2 = factory.createComponent("input");
+        auto input3 = factory.createComponent("input");
+        auto input4 = factory.createComponent("input");
+        auto orGate = factory.createComponent("or");
+        auto nandGate = factory.createComponent("nand");
+        auto andGate = factory.createComponent("and");
+        auto output = factory.createComponent("output");
+
+        auto *in1 = asInput(input1);
+        auto *in2 = asInput(input2);
+        auto *in3 = asInput(input3);
+        auto *in4 = asInput(input4);
+
+        if (in1 && in2 && in3 && in4 && orGate && nandGate && andGate && output) {
+            in1->setValue(nts::Tristate::True);
+            in2->setValue(nts::Tristate::False);
+            in3->setValue(nts::Tristate::True);
+            in4->setValue(nts::Tristate::False);
+
+            orGate->setLink(1, *input1, 1);
+            orGate->setLink(2, *input2, 1);
+            nandGate->setLink(1, *input3, 1);
+            nandGate->setLink(2, *input4, 1);
+            andGate->setLink(1, *orGate, 3);
+            andGate->setLink(2, *nandGate, 3);
+            output->setLink(1, *andGate, 3);
+
+            printCheck("AND(OR(T,F), NAND(T,F))", output->compute(1), nts::Tristate::True);
+        }
+    }
+
     std::cout << "\n== Clock ==" << std::endl;
     {
         nts::ClockComponent clock(nts::Tristate::Undefined);
