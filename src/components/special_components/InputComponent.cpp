@@ -7,7 +7,7 @@
 
 #include "InputComponent.hpp"
 
-nts::InputComponent::InputComponent() : _value(nts::Tristate::Undefined)
+nts::InputComponent::InputComponent() : _value(nts::Tristate::Undefined), _nextValue(nts::Tristate::Undefined)
 {
 }
 
@@ -15,7 +15,7 @@ nts::InputComponent::InputComponent() : _value(nts::Tristate::Undefined)
 ** @brief Construct an InputComponent with the specified initial value.
 ** @param value The initial value of the InputComponent (True, False, or Undefined).
 */
-nts::InputComponent::InputComponent(nts::Tristate value) : _value(value)
+nts::InputComponent::InputComponent(nts::Tristate value) : _value(value), _nextValue(value)
 {
 }
 
@@ -34,7 +34,7 @@ nts::Tristate nts::InputComponent::getValue() const
 */
 void nts::InputComponent::setValue(nts::Tristate value)
 {
-    _value = value;
+    _nextValue = value;
 }
 
 /*
@@ -48,4 +48,11 @@ nts::Tristate nts::InputComponent::compute(std::size_t pin)
         return nts::Tristate::Undefined;
 
     return _value;
+}
+
+void nts::InputComponent::simulate(std::size_t tick)
+{
+    (void)tick;
+
+    _value = _nextValue;
 }

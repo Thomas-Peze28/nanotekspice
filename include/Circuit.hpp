@@ -21,7 +21,6 @@ namespace nts {
             Circuit() = default;
             ~Circuit() = default;
 
-
             void simulate(std::size_t tick) override;
             nts::Tristate compute(std::size_t pin) override;
             void setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin) override;
@@ -29,6 +28,8 @@ namespace nts {
             void addComponent(const std::string& name, std::unique_ptr<nts::IComponent> component);
             nts::IComponent* getComponent(const std::string& name);
             void display(std::size_t tick);
+
+            bool assignValue(const std::string& command);
 
         private:
             std::map<std::string, std::unique_ptr<nts::IComponent>> _components;

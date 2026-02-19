@@ -1,5 +1,6 @@
 #include "Circuit.hpp"
 #include <iostream>
+#include <sstream>
 
 void nts::Circuit::addComponent(const std::string &name, std::unique_ptr<nts::IComponent> component)
 {
@@ -24,7 +25,7 @@ void nts::Circuit::display(std::size_t tick)
     {
         if (dynamic_cast<nts::InputComponent *>(component.get()) != nullptr)
         {
-            std::cout << "    "  << name << ": " << component->compute(1) << std::endl;
+            std::cout << "    " << name << ": " << component->compute(1) << std::endl;
         }
     }
 
@@ -65,4 +66,44 @@ std::ostream &operator<<(std::ostream &os, const nts::Circuit &circuit)
     (void)circuit;
     os << "Circuit" << std::endl;
     return os;
+}
+
+bool nts::Circuit::assignValue(const std::string &command)
+{
+    std::stringstream ss(command);
+
+    std::string name;
+    std::string value;
+
+    std::getline(ss, name, '=');
+    std::getline(ss, value, '=');
+
+    for (auto &[compName, component] : _components)
+    {
+        if (compName == name)
+        {
+            auto inputComp = dynamic_cast<nts::InputComponent *>(component.get());
+            auto clockComp = dynamic_cast<nts::ClockComponent *>(component.get());
+
+            if (inputComp != nullptr)
+            {
+                if (value == "0")
+                    inputComp->setValue(nts::False);
+                else if (value == "1")
+                    inputComp->setValue(nts::True);
+                else
+                    inputComp->setValue(nts::Undefined);
+            }
+            else if (clockComp != nullptr)
+            {
+                if (value == "0")
+                    clockComp->setValue(nts::False);
+                else if (value == "1")
+                    clockComp->setValue(nts::True);
+                else
+                    clockComp->setValue(nts::Undefined);
+            }
+        }
+    }
+    return true;
 }

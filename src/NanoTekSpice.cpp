@@ -38,8 +38,6 @@ bool nts::NanoTekSpice::buildCircuit(const std::string &file_name)
     if (!_parser.are_valid_arguments())
         return false;
 
-    std::cout << _parser << std::endl;
-
     for (const auto &chipset : _parser.get_chipsets())
     {
         std::string type = chipset[0];
@@ -68,9 +66,6 @@ bool nts::NanoTekSpice::buildCircuit(const std::string &file_name)
         comp1->setLink(pin1, *comp2, pin2);
         comp2->setLink(pin2, *comp1, pin1);
     }
-
-    std::cout << _circuit << std::endl;
-
     return true;
 }
 
@@ -93,7 +88,10 @@ void nts::NanoTekSpice::shell()
             tick++;
         } else if (command == "display") {
             _circuit.display(tick);
-        } else {
+        } else if (command.find("=") != std::string::npos) {
+            _circuit.assignValue(command);
+        }
+        else {
             std::cout << "Unknown command: " << command << std::endl;
         }
     }

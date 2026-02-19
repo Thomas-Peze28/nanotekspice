@@ -26,6 +26,7 @@ namespace nts {
 
         private:
             nts::Tristate _value;
+            nts::Tristate _nextValue;
     };
 }
 

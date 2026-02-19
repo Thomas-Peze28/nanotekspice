@@ -22,8 +22,11 @@ namespace nts {
             nts::Tristate getValue() const;
             void setValue(nts::Tristate value);
 
+            void simulate(std::size_t tick) override;
+
         private:
             nts::Tristate _value;
+            nts::Tristate _nextValue;
     };
 }
 
