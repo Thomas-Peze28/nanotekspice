@@ -5,6 +5,14 @@
 ## project
 ##
 
+RED=\033[0;31m
+GREEN=\033[0;32m
+YELLOW=\033[0;33m
+BLUE=\033[0;34m
+MAGENTA=\033[0;35m
+CYAN=\033[0;36m
+RESET=\033[0m
+
 ELEMENTARY_COMPONENTS = src/components/elementary_components/AndComponent.cpp \
 						src/components/elementary_components/OrComponent.cpp \
 						src/components/elementary_components/XorComponent.cpp \
@@ -48,15 +56,21 @@ CXXFLAGS = -Wextra -Wall -I ./include/ -I ./include/components -I ./include/comp
 
 LDLIBS   = -lm
 
+.SILENT:
+
 all:    $(NAME)
 
 $(NAME):    $(OBJ)
 	$(CXX) -o $(NAME) $(OBJ) $(CXXFLAGS) $(LDLIBS)
+	@printf "$(GREEN)[OK]$(RESET) Binary $(CYAN)'$(NAME)'$(RESET) compiled successfully.\n"
 
 clean:
 	rm -f $(OBJ)
+	@printf "$(YELLOW)[INFO]$(RESET) Object files removed.\n"
 
 fclean: clean
 	rm -f $(NAME)
+	@printf "$(YELLOW)[INFO]$(RESET) Binary $(CYAN)'$(NAME)'$(RESET) removed.\n"
 
 re:     fclean all
+		@printf "$(BLUE)[INFO]$(RESET) Project rebuilt successfully.\n"
