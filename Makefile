@@ -28,6 +28,7 @@ BONUS_COMPONENTS = src/components/bonus_components/NorComponent.cpp \
 
 SRC     =   src/main.cpp \
 			src/NanoTekSpice.cpp \
+			src/Circuit.cpp \
 			src/ComponentFactory.cpp \
 			src/components/AComponent.cpp \
 			src/components/Link.cpp \

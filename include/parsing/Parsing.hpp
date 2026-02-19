@@ -32,4 +32,6 @@ namespace nts {
     };
 }
 
+std::ostream& operator<<(std::ostream& os, const nts::Parsing& parsing);
+
 #endif /* !PARSING_HPP_ */

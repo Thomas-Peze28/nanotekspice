@@ -12,6 +12,7 @@
 #include "Link.hpp"
 #include <map>
 #include <vector>
+#include <iostream>
 
 namespace nts {
 
@@ -36,5 +37,7 @@ nts::Tristate operator!(nts::Tristate value);
 nts::Tristate operator&&(nts::Tristate val1, nts::Tristate val2);
 nts::Tristate operator||(nts::Tristate val1, nts::Tristate val2);
 nts::Tristate operator^(nts::Tristate val1, nts::Tristate val2);
+
+std::ostream& operator<<(std::ostream& os, const nts::Tristate& tristate);
 
 #endif /* ACOMPONENTS_H */

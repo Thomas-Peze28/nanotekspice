@@ -31,7 +31,7 @@ void nts::Parsing::set_chipsets_links(std::vector<std::vector<std::string>> file
     int chip = 0;
     int lin = 0;
 
-    if (file_content[0][0] != ".chipsets" || file_content[0][0] != ".links") {
+    if (file_content[0][0] != ".chipsets" && file_content[0][0] != ".links") {
         std::cout << "Not accepted line format in file." << std::endl;
         return;
     }
@@ -171,4 +171,17 @@ bool nts::Parsing::are_valid_arguments()
     if (!are_valid_links())
         return false;
     return true;
+}
+
+std::ostream& operator<<(std::ostream& os, const nts::Parsing& parsing)
+{
+    os << "Chipsets:" << std::endl;
+    for (std::vector<std::string> chipset : parsing.get_chipsets()) {
+        os << "    type: " << chipset[0] << "    name: \"" << chipset[1] << "\"" << std::endl;
+    }
+    os << "Links:" << std::endl;
+    for (std::vector<std::string> link : parsing.get_links()) {
+        os << "    " << link[0] << ":" << link[1] << " -> " << link[2] << ":" << link[3] << std::endl;
+    }
+    return os;
 }

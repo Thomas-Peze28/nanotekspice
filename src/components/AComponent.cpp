@@ -104,4 +104,19 @@ nts::Tristate nts::AComponent::getLink(std::size_t pin)
     return state;
 }
 
+std::ostream& operator<<(std::ostream& os, const nts::Tristate& tristate)
+{
+    switch (tristate) {
+        case nts::Tristate::Undefined:
+            os << "U";
+            break;
+        case nts::Tristate::True:
+            os << "1";
+            break;
+        case nts::Tristate::False:
+            os << "0";
+            break;
+    }
+    return os;
+}
 
