@@ -46,13 +46,28 @@ SRC     =   src/main.cpp \
 			$(GATE_COMPONENTS) \
 			$(BONUS_COMPONENTS) \
 
+SRC_TESTS = tests/tests_parsing.cpp \
+			tests/tests_factory.cpp \
+			tests/tests_components.cpp \
+			tests/tests_circuit.cpp \
+
+SRC_NO_MAIN = $(filter-out src/main.cpp, $(SRC))
+
+OBJ_TESTS = $(SRC_NO_MAIN:.cpp=.gcda)
+
 CXX     =   clang++
 
 OBJ     =   $(SRC:.cpp=.o)
 
 NAME    =   nanotekspice
 
+NAME_TESTS = unit_tests
+
 CXXFLAGS = -Wextra -Wall -I ./include/ -I ./include/components -I ./include/components/special_components -I ./include/components/elementary_components -I ./include/components/gate_components -I ./include/components/bonus_components -I ./include/parsing -std=c++20
+
+TESTS_CXXFLAGS = $(CXXFLAGS) --coverage
+
+TESTS_LDFLAGS = -lcriterion --coverage
 
 LDLIBS   = -lm
 
@@ -74,3 +89,18 @@ fclean: clean
 
 re:     fclean all
 		@printf "$(BLUE)[INFO]$(RESET) Project rebuilt successfully.\n"
+
+tests_run:
+	@printf "$(CYAN)[TESTS]$(RESET) Compiling unit tests with coverage...\n"
+	@$(CXX) $(TESTS_CXXFLAGS) $(SRC_NO_MAIN) $(SRC_TESTS) $(TESTS_LDFLAGS) -o $(NAME_TESTS)
+	@printf "$(GREEN)[OK]$(RESET) Tests binary $(CYAN)'$(NAME_TESTS)'$(RESET) compiled successfully.\n\n"
+	@printf "$(CYAN)[TESTS]$(RESET) Running tests...\n"
+	@./$(NAME_TESTS)
+	@$(MAKE) --no-print-directory clean_tests
+
+clean_tests:
+	@rm -f *.gcda *.gcno *.o
+	@rm -f $(NAME_TESTS)
+	@printf "$(YELLOW)[INFO]$(RESET) Test artifacts removed.\n"
+
+.PHONY: all clean fclean re tests_run clean_tests
