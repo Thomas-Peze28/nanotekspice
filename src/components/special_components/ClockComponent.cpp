@@ -34,7 +34,7 @@ nts::Tristate nts::ClockComponent::getValue() const
 */
 void nts::ClockComponent::setValue(nts::Tristate value)
 {
-    _value = value;
+    _nextValue = value;
 }
 
 /*
@@ -56,9 +56,14 @@ nts::Tristate nts::ClockComponent::compute(std::size_t pin)
 */
 void nts::ClockComponent::simulate(std::size_t tick)
 {
-    if (tick % 2 == 0)
+    (void)tick;
+
+    _value = _nextValue;
+
+    if (_value == nts::Tristate::True)
+        _nextValue = nts::Tristate::False;
+    else if (_value == nts::Tristate::False)
         _nextValue = nts::Tristate::True;
     else
-        _nextValue = nts::Tristate::False;
-    _value = _nextValue;
+        _nextValue = nts::Tristate::Undefined;
 }
