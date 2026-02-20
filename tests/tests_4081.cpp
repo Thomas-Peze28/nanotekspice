@@ -6,8 +6,6 @@
 */
 
 #include <criterion/criterion.h>
-#include "AComponent.hpp"
-#include "AndComponent.hpp"
 #include "4081Component.hpp"
 #include "InputComponent.hpp"
 
