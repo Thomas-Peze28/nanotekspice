@@ -60,4 +60,5 @@ void nts::ClockComponent::simulate(std::size_t tick)
         _nextValue = nts::Tristate::True;
     else
         _nextValue = nts::Tristate::False;
+    _value = _nextValue;
 }
