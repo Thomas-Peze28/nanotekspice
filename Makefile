@@ -31,6 +31,8 @@ GATE_COMPONENTS = src/components/gate_components/4001Component.cpp \
 				  src/components/gate_components/4071Component.cpp \
 				  src/components/gate_components/4081Component.cpp \
 
+ADVANCED_COMPONENTS = src/components/advanced_components/4008Component.cpp \
+
 BONUS_COMPONENTS = src/components/bonus_components/NorComponent.cpp \
 				   src/components/bonus_components/NandComponent.cpp \
 
@@ -44,6 +46,7 @@ SRC     =   src/main.cpp \
 			$(ELEMENTARY_COMPONENTS) \
 			$(SPECIAL_COMPONENTS) \
 			$(GATE_COMPONENTS) \
+			$(ADVANCED_COMPONENTS) \
 			$(BONUS_COMPONENTS) \
 
 SRC_TESTS = tests/tests_parsing.cpp \
@@ -63,7 +66,7 @@ NAME    =   nanotekspice
 
 NAME_TESTS = unit_tests
 
-CXXFLAGS = -Wextra -Wall -I ./include/ -I ./include/components -I ./include/components/special_components -I ./include/components/elementary_components -I ./include/components/gate_components -I ./include/components/bonus_components -I ./include/parsing -std=c++20
+CXXFLAGS = -Wextra -Wall -I ./include/ -I ./include/components -I ./include/components/special_components -I ./include/components/elementary_components -I ./include/components/gate_components -I ./include/components/advanced_components -I ./include/components/bonus_components -I ./include/parsing -std=c++20
 
 TESTS_CXXFLAGS = $(CXXFLAGS) --coverage
 

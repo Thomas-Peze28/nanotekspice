@@ -29,6 +29,7 @@
 #include "4069Component.hpp"
 #include "4071Component.hpp"
 #include "4081Component.hpp"
+#include "4008Component.hpp"
 #include "NandComponent.hpp"
 #include "NorComponent.hpp"
 
