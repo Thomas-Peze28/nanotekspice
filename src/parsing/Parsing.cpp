@@ -88,7 +88,9 @@ std::vector<std::vector<std::string>> nts::Parsing::parse_file_name(std::string 
         if (line.empty())
             continue;
         words = clean_string(line);
-        if (words[0][0] != '#')
+        if (words.empty())
+            continue;
+        if (!words[0].empty() && words[0][0] != '#')
             lines.push_back(words);
     }
     if (lines.empty()) {
