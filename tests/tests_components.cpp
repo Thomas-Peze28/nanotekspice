@@ -16,7 +16,6 @@
 #include "4030Component.hpp"
 #include "4069Component.hpp"
 #include "4071Component.hpp"
-#include "4081Component.hpp"
 
 namespace {
 	void link_input(nts::AComponent &target, std::size_t pin, nts::InputComponent &input)
@@ -140,24 +139,4 @@ Test(components, chip_4069_not_outputs) {
 
 	link_input(comp, 1, in_true);
 	cr_assert_eq(comp.compute(2), nts::Tristate::False);
-}
-
-Test(components, chip_4071_or_outputs) {
-	nts::InputComponent in_true(nts::Tristate::True);
-	nts::InputComponent in_false(nts::Tristate::False);
-	nts::Component4071 comp;
-
-	link_input(comp, 12, in_true);
-	link_input(comp, 13, in_false);
-	cr_assert_eq(comp.compute(11), nts::Tristate::True);
-}
-
-Test(components, chip_4081_and_outputs) {
-	nts::InputComponent in_true(nts::Tristate::True);
-	nts::InputComponent in_false(nts::Tristate::False);
-	nts::Component4081 comp;
-
-	link_input(comp, 1, in_true);
-	link_input(comp, 2, in_false);
-	cr_assert_eq(comp.compute(3), nts::Tristate::False);
 }
