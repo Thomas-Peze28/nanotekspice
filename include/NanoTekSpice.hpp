@@ -13,31 +13,26 @@
 #include "Link.hpp"
 #include "Circuit.hpp"
 #include "ComponentFactory.hpp"
+#include "Parsing.hpp"
 
-#include "InputComponent.hpp"
-#include "OutputComponent.hpp"
-#include "ClockComponent.hpp"
-#include "TrueComponent.hpp"
-#include "FalseComponent.hpp"
-#include "AndComponent.hpp"
-#include "OrComponent.hpp"
-#include "XorComponent.hpp"
-#include "NotComponent.hpp"
-#include "4001Component.hpp"
-#include "4011Component.hpp"
-#include "4030Component.hpp"
-#include "4069Component.hpp"
-#include "4071Component.hpp"
-#include "4081Component.hpp"
-#include "4008Component.hpp"
-#include "NandComponent.hpp"
-#include "NorComponent.hpp"
-
-class NanoTekSpice {
+namespace nts
+{
+    class NanoTekSpice
+    {
     public:
         NanoTekSpice() = default;
         ~NanoTekSpice() = default;
-};
 
+        int run(int argc, char **argv);
+        void shell();
+
+        bool buildCircuit(const std::string &file_name);
+
+    private:
+        Circuit _circuit;
+        ComponentFactory _factory;
+        Parsing _parser;
+    };
+}
 
 #endif /* NANOTEKSPICE_H */

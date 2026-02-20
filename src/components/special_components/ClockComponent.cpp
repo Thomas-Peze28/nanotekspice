@@ -7,7 +7,7 @@
 
 #include "ClockComponent.hpp"
 
-nts::ClockComponent::ClockComponent() : _value(nts::Tristate::Undefined)
+nts::ClockComponent::ClockComponent() : _value(nts::Tristate::Undefined), _nextValue(nts::Tristate::Undefined)
 {
 }
 
@@ -15,7 +15,7 @@ nts::ClockComponent::ClockComponent() : _value(nts::Tristate::Undefined)
 ** @brief Construct an ClockComponent with the specified initial value.
 ** @param value The initial value of the ClockComponent (True, False, or Undefined).
 */
-nts::ClockComponent::ClockComponent(nts::Tristate value) : _value(value)
+nts::ClockComponent::ClockComponent(nts::Tristate value) : _value(value), _nextValue(value)
 {
 }
 
@@ -57,7 +57,7 @@ nts::Tristate nts::ClockComponent::compute(std::size_t pin)
 void nts::ClockComponent::simulate(std::size_t tick)
 {
     if (tick % 2 == 0)
-        _value = nts::Tristate::True;
+        _nextValue = nts::Tristate::True;
     else
-        _value = nts::Tristate::False;
+        _nextValue = nts::Tristate::False;
 }
