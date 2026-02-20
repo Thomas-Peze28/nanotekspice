@@ -27,6 +27,10 @@ void nts::Circuit::display(std::size_t tick)
         {
             std::cout << "  " << name << ": " << component->compute(1) << std::endl;
         }
+        if (dynamic_cast<nts::ClockComponent *>(component.get()) != nullptr)
+        {
+            std::cout << "  " << name << ": " << component->compute(1) << std::endl;
+        }
     }
 
     std::cout << "output(s):" << std::endl;
