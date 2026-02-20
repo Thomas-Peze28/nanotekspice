@@ -25,7 +25,7 @@ void nts::Circuit::display(std::size_t tick)
     {
         if (dynamic_cast<nts::InputComponent *>(component.get()) != nullptr)
         {
-            std::cout << "    " << name << ": " << component->compute(1) << std::endl;
+            std::cout << "  " << name << ": " << component->compute(1) << std::endl;
         }
     }
 
@@ -34,7 +34,7 @@ void nts::Circuit::display(std::size_t tick)
     {
         if (dynamic_cast<nts::OutputComponent *>(component.get()) != nullptr)
         {
-            std::cout << "    " << name << ": " << component->compute(1) << std::endl;
+            std::cout << "  " << name << ": " << component->compute(1) << std::endl;
         }
     }
     return;
