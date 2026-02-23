@@ -78,3 +78,13 @@ Test(components, not_invalid_pins) {
     // Tenter de lire l'entrée renvoie Undefined ou l'état de l'entrée selon ton architecture
     cr_assert_eq(not_gate.compute(1), nts::Tristate::Undefined);
 }
+
+Test(components, not_invalid_pins_coverage) {
+    nts::NotComponent not_gate;
+    
+    // Test de la pin d'entrée (ne doit pas renvoyer de valeur via compute)
+    cr_assert_eq(not_gate.compute(1), nts::Tristate::Undefined);
+    
+    // Test d'une pin inexistante
+    cr_assert_eq(not_gate.compute(3), nts::Tristate::Undefined);
+}

@@ -1,142 +1,119 @@
+/*
+** EPITECH PROJECT, 2026
+** G-OOP-400-LIL-4-1-tekspice-26
+** File description:
+** tests_components
+*/
+
 #include <criterion/criterion.h>
 #include "AComponent.hpp"
-#include "InputComponent.hpp"
-#include "OutputComponent.hpp"
-#include "TrueComponent.hpp"
-#include "FalseComponent.hpp"
-#include "ClockComponent.hpp"
-#include "AndComponent.hpp"
-#include "OrComponent.hpp"
-#include "XorComponent.hpp"
-#include "NotComponent.hpp"
-#include "NandComponent.hpp"
-#include "NorComponent.hpp"
-#include "4001Component.hpp"
-#include "4011Component.hpp"
-#include "4030Component.hpp"
-#include "4069Component.hpp"
-#include "4071Component.hpp"
+#include "IComponent.hpp"
+#include <sstream>
 
-namespace {
-	void link_input(nts::AComponent &target, std::size_t pin, nts::InputComponent &input)
-	{
-		target.setLink(pin, input, 1);
-	}
+
+Test(tristate, operator_not_undefined) {
+    nts::Tristate value = nts::Tristate::Undefined;
+    nts::Tristate result = !value;
+
+    cr_assert_eq(result, nts::Tristate::Undefined, 
+        "L'inverse de Undefined devrait être Undefined.");
 }
 
-Test(components, input_component_updates_on_simulate) {
-	nts::InputComponent input;
+Test(tristate, operator_not_full_coverage) {
+    // Cas True -> False
+    cr_assert_eq(!nts::Tristate::True, nts::Tristate::False);
 
-	cr_assert_eq(input.compute(1), nts::Tristate::Undefined);
-	input.setValue(nts::Tristate::True);
-	cr_assert_eq(input.compute(1), nts::Tristate::Undefined);
-	input.simulate(0);
-	cr_assert_eq(input.compute(1), nts::Tristate::True);
-	cr_assert_eq(input.compute(2), nts::Tristate::Undefined);
+    // Cas False -> True
+    cr_assert_eq(!nts::Tristate::False, nts::Tristate::True);
+
+    // Cas Undefined -> Undefined (Ton dernier else)
+    cr_assert_eq(!nts::Tristate::Undefined, nts::Tristate::Undefined);
 }
 
-Test(components, output_component_reflects_link) {
-	nts::InputComponent input(nts::Tristate::True);
-	nts::OutputComponent output;
+Test(tristate, operator_and_undefined_cases) {
+    // Cas True && Undefined = Undefined
+    cr_assert_eq(nts::Tristate::True && nts::Tristate::Undefined, nts::Tristate::Undefined);
 
-	output.setLink(1, input, 1);
-	cr_assert_eq(output.compute(1), nts::Tristate::True);
-	cr_assert_eq(output.compute(2), nts::Tristate::Undefined);
+    // Cas Undefined && True = Undefined
+    cr_assert_eq(nts::Tristate::Undefined && nts::Tristate::True, nts::Tristate::Undefined);
+
+    // Cas Undefined && Undefined = Undefined
+    cr_assert_eq(nts::Tristate::Undefined && nts::Tristate::Undefined, nts::Tristate::Undefined);
 }
 
-Test(components, true_false_components_constant) {
-	nts::TrueComponent t_comp;
-	nts::FalseComponent f_comp;
+Test(tristate, operator_and_full_coverage) {
+    // Branche 1 : Dominance du False (if)
+    cr_assert_eq(nts::Tristate::False && nts::Tristate::True, nts::Tristate::False);
+    cr_assert_eq(nts::Tristate::False && nts::Tristate::Undefined, nts::Tristate::False);
 
-	cr_assert_eq(t_comp.compute(1), nts::Tristate::True);
-	cr_assert_eq(t_comp.compute(2), nts::Tristate::Undefined);
-	cr_assert_eq(f_comp.compute(1), nts::Tristate::False);
-	cr_assert_eq(f_comp.compute(2), nts::Tristate::Undefined);
+    // Branche 2 : Full True (else if)
+    cr_assert_eq(nts::Tristate::True && nts::Tristate::True, nts::Tristate::True);
 }
 
-Test(components, clock_component_value) {
-	nts::ClockComponent clock;
+Test(tristate, operator_or_else_coverage) {
+    // Cas False || Undefined = Undefined
+    cr_assert_eq(nts::Tristate::False || nts::Tristate::Undefined, nts::Tristate::Undefined);
 
-	clock.setValue(nts::Tristate::True);
-	cr_assert_eq(clock.compute(1), nts::Tristate::True);
-	cr_assert_eq(clock.compute(2), nts::Tristate::Undefined);
+    // Cas Undefined || False = Undefined
+    cr_assert_eq(nts::Tristate::Undefined || nts::Tristate::False, nts::Tristate::Undefined);
+
+    // Cas Undefined || Undefined = Undefined
+    cr_assert_eq(nts::Tristate::Undefined || nts::Tristate::Undefined, nts::Tristate::Undefined);
 }
 
-Test(components, and_or_xor_not_components) {
-	nts::InputComponent in_true(nts::Tristate::True);
-	nts::InputComponent in_false(nts::Tristate::False);
-	nts::AndComponent and_comp;
-	nts::OrComponent or_comp;
-	nts::XorComponent xor_comp;
-	nts::NotComponent not_comp;
+Test(tristate, operator_or_full_branches) {
+    // Branche 1 : Dominance du True (if)
+    cr_assert_eq(nts::Tristate::True || nts::Tristate::False, nts::Tristate::True);
+    cr_assert_eq(nts::Tristate::True || nts::Tristate::Undefined, nts::Tristate::True);
 
-	link_input(and_comp, 1, in_true);
-	link_input(and_comp, 2, in_false);
-	cr_assert_eq(and_comp.compute(3), nts::Tristate::False);
-	cr_assert_eq(and_comp.compute(1), nts::Tristate::Undefined);
-
-	link_input(or_comp, 1, in_true);
-	link_input(or_comp, 2, in_false);
-	cr_assert_eq(or_comp.compute(3), nts::Tristate::True);
-
-	link_input(xor_comp, 1, in_true);
-	link_input(xor_comp, 2, in_true);
-	cr_assert_eq(xor_comp.compute(3), nts::Tristate::False);
-
-	link_input(not_comp, 1, in_true);
-	cr_assert_eq(not_comp.compute(2), nts::Tristate::False);
+    // Branche 2 : Full False (else if)
+    cr_assert_eq(nts::Tristate::False || nts::Tristate::False, nts::Tristate::False);
 }
 
-Test(components, nand_nor_components) {
-	nts::InputComponent in_true(nts::Tristate::True);
-	nts::InputComponent in_false(nts::Tristate::False);
-	nts::NandComponent nand_comp;
-	nts::NorComponent nor_comp;
+Test(tristate, operator_xor_else_coverage) {
+    // Cas True ^ Undefined = Undefined
+    cr_assert_eq(nts::Tristate::True ^ nts::Tristate::Undefined, nts::Tristate::Undefined);
 
-	link_input(nand_comp, 1, in_true);
-	link_input(nand_comp, 2, in_true);
-	cr_assert_eq(nand_comp.compute(3), nts::Tristate::False);
+    // Cas False ^ Undefined = Undefined
+    cr_assert_eq(nts::Tristate::False ^ nts::Tristate::Undefined, nts::Tristate::Undefined);
 
-	link_input(nor_comp, 1, in_false);
-	link_input(nor_comp, 2, in_false);
-	cr_assert_eq(nor_comp.compute(3), nts::Tristate::True);
+    // Cas Undefined ^ True = Undefined
+    cr_assert_eq(nts::Tristate::Undefined ^ nts::Tristate::True, nts::Tristate::Undefined);
+
+    // Cas Undefined ^ Undefined = Undefined
+    cr_assert_eq(nts::Tristate::Undefined ^ nts::Tristate::Undefined, nts::Tristate::Undefined);
 }
 
-Test(components, chip_4001_nor_outputs) {
-	nts::InputComponent in_true(nts::Tristate::True);
-	nts::InputComponent in_false(nts::Tristate::False);
-	nts::Component4001 comp;
+Test(tristate, operator_xor_standard_branches) {
+    // Branche 1 : Différents -> True (if)
+    cr_assert_eq(nts::Tristate::True ^ nts::Tristate::False, nts::Tristate::True);
+    cr_assert_eq(nts::Tristate::False ^ nts::Tristate::True, nts::Tristate::True);
 
-	link_input(comp, 1, in_true);
-	link_input(comp, 2, in_false);
-	cr_assert_eq(comp.compute(3), nts::Tristate::False);
-	cr_assert_eq(comp.compute(14), nts::Tristate::Undefined);
+    // Branche 2 : Identiques -> False (else if)
+    cr_assert_eq(nts::Tristate::True ^ nts::Tristate::True, nts::Tristate::False);
+    cr_assert_eq(nts::Tristate::False ^ nts::Tristate::False, nts::Tristate::False);
 }
 
-Test(components, chip_4011_nand_outputs) {
-	nts::InputComponent in_true(nts::Tristate::True);
-	nts::InputComponent in_false(nts::Tristate::False);
-	nts::Component4011 comp;
+Test(tristate, ostream_undefined_coverage) {
+    nts::Tristate value = nts::Tristate::Undefined;
+    std::stringstream ss;
 
-	link_input(comp, 5, in_true);
-	link_input(comp, 6, in_false);
-	cr_assert_eq(comp.compute(4), nts::Tristate::True);
+    ss << value;
+
+    cr_assert_eq(ss.str(), "U", 
+        "L'affichage de Undefined est incorrect. Attendu: 'U', Obtenu: '%s'", 
+        ss.str().c_str());
 }
 
-Test(components, chip_4030_xor_outputs) {
-	nts::InputComponent in_true(nts::Tristate::True);
-	nts::InputComponent in_false(nts::Tristate::False);
-	nts::Component4030 comp;
+Test(tristate, ostream_full_coverage) {
+    std::stringstream ss1, ss2, ss3;
 
-	link_input(comp, 8, in_true);
-	link_input(comp, 9, in_false);
-	cr_assert_eq(comp.compute(10), nts::Tristate::True);
-}
+    ss1 << nts::Tristate::Undefined;
+    cr_assert_eq(ss1.str(), "U");
 
-Test(components, chip_4069_not_outputs) {
-	nts::InputComponent in_true(nts::Tristate::True);
-	nts::Component4069 comp;
+    ss2 << nts::Tristate::True;
+    cr_assert_eq(ss2.str(), "1");
 
-	link_input(comp, 1, in_true);
-	cr_assert_eq(comp.compute(2), nts::Tristate::False);
+    ss3 << nts::Tristate::False;
+    cr_assert_eq(ss3.str(), "0");
 }

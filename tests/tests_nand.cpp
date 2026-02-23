@@ -94,3 +94,14 @@ Test(components, nand_unlinked_pins) {
     // Le calcul sur la pin 3 devrait donner Undefined car la pin 2 est vide
     cr_assert_eq(nand.compute(3), nts::Tristate::Undefined);
 }
+
+Test(components, nand_invalid_pins_coverage) {
+    nts::NandComponent nand;
+    
+    // Test sur les pins d'entrée (ne doivent pas renvoyer de valeur logique via compute)
+    cr_assert_eq(nand.compute(1), nts::Tristate::Undefined, "La pin 1 ne devrait pas être calculable.");
+    cr_assert_eq(nand.compute(2), nts::Tristate::Undefined, "La pin 2 ne devrait pas être calculable.");
+    
+    // Test sur une pin inexistante
+    cr_assert_eq(nand.compute(42), nts::Tristate::Undefined, "Une pin hors limites doit renvoyer Undefined.");
+}

@@ -92,3 +92,14 @@ Test(components, nor_invalid_pins) {
     // Calculer sur une pin d'entrée (1 ou 2) n'a pas de sens logique
     cr_assert_any_throw(nor.compute(1));
 }
+
+Test(components, nor_invalid_pins_coverage) {
+    nts::NorComponent nor_gate;
+    
+    // Test des pins d'entrée
+    cr_assert_eq(nor_gate.compute(1), nts::Tristate::Undefined);
+    cr_assert_eq(nor_gate.compute(2), nts::Tristate::Undefined);
+    
+    // Test d'une pin hors mapping (ex: pin 4)
+    cr_assert_eq(nor_gate.compute(4), nts::Tristate::Undefined);
+}

@@ -1,4 +1,5 @@
 #include <criterion/criterion.h>
+#include <criterion/redirect.h>
 #include "Circuit.hpp"
 #include "InputComponent.hpp"
 #include "OutputComponent.hpp"
@@ -1171,4 +1172,122 @@ Test(circuit_control, selector_with_multiple_paths) {
 	
 	circuit.simulate(0);
 	cr_assert(out->compute(1) == nts::Tristate::True || out->compute(1) == nts::Tristate::False);
+}
+
+// Fonction utilitaire pour rediriger stdout (propre à Criterion)
+void redirect_all_std() {
+    cr_redirect_stdout();
+}
+
+Test(Circuit, display_outputs_only, .init = redirect_all_std) {
+    nts::Circuit circuit;
+    
+    // 1. On prépare les composants
+    auto in = std::make_unique<nts::InputComponent>(nts::True);
+    auto out = std::make_unique<nts::OutputComponent>();
+    
+    // On lie l'output à l'input pour avoir une valeur concrète (1)
+    out->setLink(1, *in, 1);
+
+    // 2. On les ajoute au circuit
+    circuit.addComponent("my_input", std::move(in));
+    circuit.addComponent("my_output", std::move(out));
+
+    // 3. On appelle display
+    circuit.display(0);
+
+    // 4. On récupère le flux de sortie
+    std::fflush(stdout);
+    std::string out_str = "";
+    char buf[1024];
+    FILE *f = cr_get_redirected_stdout();
+    while (fgets(buf, 1024, f)) {
+        out_str += buf;
+    }
+
+    // 5. Vérifications spécifiques à la deuxième boucle (outputs)
+    // On vérifie que "my_output" apparaît BIEN après la ligne "output(s):"
+    const char *output_section = strstr(out_str.c_str(), "output(s):");
+    
+    cr_assert_not_null(output_section, "La section output(s) est manquante");
+    cr_assert_not_null(strstr(output_section, "my_output: 1"), 
+        "L'output n'a pas été trouvé ou sa valeur est incorrecte dans la section dédiée");
+}
+
+Test(circuit, operator_ostream_coverage) {
+    nts::Circuit circuit;
+    std::stringstream ss;
+
+    // On utilise l'opérateur de flux
+    ss << circuit;
+
+    // On vérifie que la sortie correspond exactement à "Circuit\n"
+    // Note : std::endl ajoute un retour à la ligne
+    cr_assert_eq(ss.str(), "Circuit\n", 
+        "L'output de l'opérateur << est incorrect. Attendu: 'Circuit\\n', Obtenu: '%s'", 
+        ss.str().c_str());
+}
+
+Test(circuit, assign_value_basic) {
+    nts::Circuit circuit;
+    circuit.addComponent("in", std::make_unique<nts::InputComponent>());
+    circuit.addComponent("clk", std::make_unique<nts::ClockComponent>());
+
+    // Test Input à 1
+    circuit.assignValue("in=1");
+    circuit.simulate(0);
+    cr_assert_eq(circuit.getComponent("in")->compute(1), nts::True);
+
+    // Test Clock à 0
+    circuit.assignValue("clk=0");
+    circuit.simulate(0);
+    cr_assert_eq(circuit.getComponent("clk")->compute(1), nts::False);
+}
+
+Test(circuit, assign_value_undefined) {
+    nts::Circuit circuit;
+    circuit.addComponent("in", std::make_unique<nts::InputComponent>(nts::True));
+
+    // Passage à Undefined via la commande "U"
+    circuit.assignValue("in=U");
+    circuit.simulate(0);
+    cr_assert_eq(circuit.getComponent("in")->compute(1), nts::Undefined);
+
+    // Passage à Undefined via une commande invalide (ex: "toto")
+    // Ton code actuel traite tout ce qui n'est pas 0 ou 1 comme Undefined
+    circuit.assignValue("in=toto");
+    circuit.simulate(0);
+    cr_assert_eq(circuit.getComponent("in")->compute(1), nts::Undefined);
+}
+
+Test(circuit, assign_value_non_input) {
+    nts::Circuit circuit;
+    circuit.addComponent("out", std::make_unique<nts::OutputComponent>());
+    
+    // Tenter d'assigner une valeur à une sortie ne doit rien faire
+    // mais la fonction doit retourner true sans crash.
+    cr_assert_eq(circuit.assignValue("out=1"), true);
+}
+
+Test(circuit, assign_value_unknown_name) {
+    nts::Circuit circuit;
+    circuit.addComponent("in", std::make_unique<nts::InputComponent>());
+
+    // Nom qui n'existe pas
+    cr_assert_eq(circuit.assignValue("ghost=1"), true);
+}
+
+Test(circuit, assign_value_format) {
+    nts::Circuit circuit;
+    circuit.addComponent("in", std::make_unique<nts::InputComponent>());
+
+    // Commande sans valeur (ex: "in=")
+    circuit.assignValue("in=");
+    circuit.simulate(0);
+    cr_assert_eq(circuit.getComponent("in")->compute(1), nts::Undefined);
+
+    // Commande avec des espaces (Attention : ton code actuel ne trim pas les espaces !)
+    circuit.assignValue("in = 1"); 
+    // Ici, le nom cherché sera "in " (avec un espace), donc l'assignation échouera.
+    // C'est un bon test pour voir le comportement actuel de ton parsing.
 }
