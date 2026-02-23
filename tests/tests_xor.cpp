@@ -93,3 +93,14 @@ Test(components, xor_as_inverter) {
     in_val.setValue(nts::Tristate::False);
     cr_assert_eq(xor_gate.compute(3), nts::Tristate::True); // False XOR True = True
 }
+
+Test(components, xor_invalid_pins_coverage) {
+    nts::XorComponent xor_gate;
+    
+    // Test des pins d'entrée (doivent renvoyer Undefined)
+    cr_assert_eq(xor_gate.compute(1), nts::Tristate::Undefined);
+    cr_assert_eq(xor_gate.compute(2), nts::Tristate::Undefined);
+    
+    // Test d'une pin inexistante (ex: 14)
+    cr_assert_eq(xor_gate.compute(14), nts::Tristate::Undefined);
+}

@@ -74,3 +74,14 @@ Test(components, or_invalid_pins) {
     cr_assert_eq(or_gate.compute(1), nts::Tristate::Undefined);
     cr_assert_eq(or_gate.compute(4), nts::Tristate::Undefined);
 }
+
+Test(components, or_invalid_pins_coverage) {
+    nts::OrComponent or_gate;
+    
+    // Test des pins d'entrée (ne doivent pas renvoyer de valeur)
+    cr_assert_eq(or_gate.compute(1), nts::Tristate::Undefined);
+    cr_assert_eq(or_gate.compute(2), nts::Tristate::Undefined);
+    
+    // Test d'une pin aléatoire
+    cr_assert_eq(or_gate.compute(8), nts::Tristate::Undefined);
+}
