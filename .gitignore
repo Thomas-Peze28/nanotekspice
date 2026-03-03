@@ -15,7 +15,7 @@ unit_tests*
 log
 *.pdf
 nanotekspice
-input.txt
-output.txt
+input*
+output*
 log.bin
 test*
