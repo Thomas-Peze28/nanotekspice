@@ -51,10 +51,28 @@ SRC     =   src/main.cpp \
 			$(ADVANCED_COMPONENTS) \
 			$(BONUS_COMPONENTS) \
 
-SRC_TESTS = tests/tests_parsing.cpp \
-			tests/tests_factory.cpp \
-			tests/tests_components.cpp \
-			tests/tests_circuit.cpp \
+SRC_TESTS = tests/tests_4001.cpp	\
+			tests/tests_4008.cpp	\
+			tests/tests_4011.cpp	\
+			tests/tests_4030.cpp	\
+			tests/tests_4069.cpp	\
+			tests/tests_4071.cpp	\
+			tests/tests_4081.cpp	\
+			tests/tests_and.cpp	\
+			tests/tests_circuit.cpp	\
+			tests/tests_clock.cpp	\
+			tests/tests_components.cpp	\
+			tests/tests_factory.cpp	\
+			tests/tests_false.cpp	\
+			tests/tests_input.cpp	\
+			tests/tests_nand.cpp	\
+			tests/tests_nor.cpp	\
+			tests/tests_not.cpp	\
+			tests/tests_or.cpp	\
+			tests/tests_output.cpp	\
+			tests/tests_parsing.cpp	\
+			tests/tests_true.cpp	\
+			tests/tests_xor.cpp
 
 SRC_NO_MAIN = $(filter-out src/main.cpp, $(SRC))
 
