@@ -32,6 +32,7 @@
 #include "4008Component.hpp"
 #include "NandComponent.hpp"
 #include "NorComponent.hpp"
+#include "LoggerComponent.hpp"
 
 namespace nts
 {
