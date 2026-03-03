@@ -33,6 +33,7 @@
 #include "NandComponent.hpp"
 #include "NorComponent.hpp"
 #include "LoggerComponent.hpp"
+#include "4512Component.hpp"
 
 namespace nts
 {
