@@ -84,6 +84,10 @@ nts::ComponentFactory::ComponentFactory()
     {
         return std::make_unique<Component4008>();
     };
+    _creators["logger"] = []()
+    {
+        return std::make_unique<LoggerComponent>();
+    };
 }
 
 /*
