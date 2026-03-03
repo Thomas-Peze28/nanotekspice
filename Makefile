@@ -34,6 +34,7 @@ GATE_COMPONENTS = src/components/gate_components/4001Component.cpp \
 ADVANCED_COMPONENTS = src/components/advanced_components/4008Component.cpp \
 					  src/components/advanced_components/LoggerComponent.cpp \
 					  src/components/advanced_components/4512Component.cpp \
+					  src/components/advanced_components/4514Component.cpp \
 
 BONUS_COMPONENTS = src/components/bonus_components/NorComponent.cpp \
 				   src/components/bonus_components/NandComponent.cpp \

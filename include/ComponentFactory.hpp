@@ -34,6 +34,7 @@
 #include "NorComponent.hpp"
 #include "LoggerComponent.hpp"
 #include "4512Component.hpp"
+#include "4514Component.hpp"
 
 namespace nts
 {
