@@ -43,6 +43,9 @@ bool nts::NanoTekSpice::buildCircuit(const std::string &file_name)
         std::string type = chipset[0];
         std::string name = chipset[1];
 
+        if (type == "4013")
+            return false; //  Flip-flop not supported
+
         auto component = _factory.createComponent(type);
         if (component == nullptr)
             return false;
