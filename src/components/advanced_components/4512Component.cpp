@@ -17,6 +17,8 @@ nts::Tristate nts::Component4512::compute(std::size_t pin)
     if (pin != 14)
         return nts::Tristate::Undefined;
 
+    std::size_t outputPins[8] = {0, 1, 2, 3, 4, 5, 6, 7};
+
     nts::Tristate enable = getLink(15);
     if (enable == nts::Tristate::False || enable == nts::Tristate::Undefined)
         return nts::Tristate::Undefined;
@@ -36,8 +38,6 @@ nts::Tristate nts::Component4512::compute(std::size_t pin)
 
     int index = (in_a * 1) + (in_b * 2) + (in_c * 4);
 
-    if (index == 7)
-        return getLink(9);
-    
-    return getLink(1 + index);
+    pin = outputPins[index];
+    return getLink(pin);
 }
