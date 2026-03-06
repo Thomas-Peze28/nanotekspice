@@ -93,7 +93,7 @@ void nts::AComponent::setLink(std::size_t pin, nts::IComponent &other, std::size
 */
 nts::Tristate nts::AComponent::getLink(std::size_t pin)
 {
-    nts::Tristate state;
+    nts::Tristate state = nts::Tristate::Undefined;
     
     for (auto &link : _links) {
         if (link.first == pin) {
@@ -119,4 +119,3 @@ std::ostream& operator<<(std::ostream& os, const nts::Tristate& tristate)
     }
     return os;
 }
-

@@ -14,10 +14,13 @@ namespace nts {
 
     class Component4514 : public AComponent {
         public:
-            Component4514() = default;
+            Component4514();
             ~Component4514() = default;
 
             nts::Tristate compute(std::size_t pin) override;
+        
+        private:
+            int _latch;
     };
 }
 
