@@ -60,6 +60,9 @@ SRC_TESTS = tests/tests_4001.cpp	\
 			tests/tests_4069.cpp	\
 			tests/tests_4071.cpp	\
 			tests/tests_4081.cpp	\
+			tests/tests_4512.cpp	\
+			tests/tests_4513.cpp	\
+			tests/tests_4514.cpp	\
 			tests/tests_and.cpp	\
 			tests/tests_circuit.cpp	\
 			tests/tests_clock.cpp	\
@@ -74,7 +77,8 @@ SRC_TESTS = tests/tests_4001.cpp	\
 			tests/tests_output.cpp	\
 			tests/tests_parsing.cpp	\
 			tests/tests_true.cpp	\
-			tests/tests_xor.cpp
+			tests/tests_xor.cpp	\
+			tests/tests_logger.cpp
 
 SRC_NO_MAIN = $(filter-out src/main.cpp, $(SRC))
 
