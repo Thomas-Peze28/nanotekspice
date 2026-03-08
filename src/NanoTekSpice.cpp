@@ -16,6 +16,8 @@ int nts::NanoTekSpice::run(int argc, char **argv)
     }
     if (!buildCircuit(argv[1]))
     {
+        if (_parser.get_chipsets().empty())
+            return 0;
         return 84;
     }
     shell();
@@ -37,7 +39,6 @@ bool nts::NanoTekSpice::buildCircuit(const std::string &file_name)
     }
     if (!_parser.are_valid_arguments())
         return false;
-
     for (const auto &chipset : _parser.get_chipsets())
     {
         std::string type = chipset[0];
