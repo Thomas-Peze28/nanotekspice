@@ -7,6 +7,11 @@
 
 #include "AComponent.hpp"
 
+
+nts::AComponent::AComponent() : _isComputed(false)
+{
+}
+
 /*
 ** @brief NOT operation for input value.
 ** @param value The input value to negate.
@@ -97,7 +102,18 @@ nts::Tristate nts::AComponent::getLink(std::size_t pin)
     
     for (auto &link : _links) {
         if (link.first == pin) {
-            state = link.second.OtherComponent->compute(link.second.OtherPin);
+        
+            nts::AComponent *otherComponent = dynamic_cast<nts::AComponent *>(link.second.OtherComponent);
+
+            if (otherComponent != nullptr) {
+                if (otherComponent->_isComputed)
+                    return nts::Tristate::Undefined;
+                otherComponent->_isComputed = true;
+                state = link.second.OtherComponent->compute(link.second.OtherPin);
+                otherComponent->_isComputed = false;
+            } else {
+                state = link.second.OtherComponent->compute(link.second.OtherPin);
+            }
             break;
         }
     }

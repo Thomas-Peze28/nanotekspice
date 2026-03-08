@@ -18,7 +18,7 @@ namespace nts {
 
     class AComponent : public IComponent {
         public:
-            AComponent() = default;
+            AComponent();
             ~AComponent() = default;
 
             void simulate(std::size_t tick) override;
@@ -28,6 +28,7 @@ namespace nts {
 
         protected:
         private:
+            bool _isComputed;
             std::vector<size_t> _pins;
             std::map<size_t , nts::Link> _links;
     };
