@@ -20,11 +20,6 @@ nts::Tristate nts::Component4514::compute(std::size_t pin)
 {
     std::size_t outputPins[16] = {11, 9, 10, 8, 7, 6, 5, 4, 18, 17, 20, 19, 14, 13, 16, 15};
 
-    nts::Tristate inhibit = getLink(23);
-    if (inhibit == nts::Tristate::Undefined) {
-        return nts::Tristate::Undefined;
-    }
-
     nts::Tristate strobe = getLink(1);
     
     if (strobe == nts::Tristate::True) {
@@ -43,6 +38,10 @@ nts::Tristate nts::Component4514::compute(std::size_t pin)
         return nts::Tristate::Undefined;
     }
 
+    nts::Tristate inhibit = getLink(23);
+    if (inhibit == nts::Tristate::Undefined) {
+        return nts::Tristate::Undefined;
+    }
     if (inhibit == nts::Tristate::True) {
         return nts::Tristate::False;
     }
