@@ -27,7 +27,7 @@ nts::Tristate nts::Component4514::compute(std::size_t pin)
 
     nts::Tristate strobe = getLink(1);
     
-    if (strobe == nts::Tristate::False) {
+    if (strobe == nts::Tristate::True) {
         nts::Tristate in_a = getLink(2);
         nts::Tristate in_b = getLink(3);
         nts::Tristate in_c = getLink(21);
